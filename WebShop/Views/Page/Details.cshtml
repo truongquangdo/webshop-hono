@@ -1,0 +1,174 @@
+@model WebShop.Models.Page
+
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string url = $"/page/{Model.Alias}";
+}
+<main class="main-content">
+    <!-- ...:::: Start Breadcrumb Section:::... -->
+    <div class="breadcrumb-section breadcrumb-bg-color--golden">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="breadcrumb-title">@Model.PageName</h3>
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="/">Trang chủ</a></li>
+                                    
+                                    <li class="active" aria-current="page">@Model.PageName</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ...:::: End Breadcrumb Section:::... -->
+   
+    <div class="blog-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="blog-single-wrapper">
+                        <div class="blog-single-img" data-aos="fade-up"  data-aos-delay="0">
+                            <img class="img-full" src="~/images/pages/@Model.Thumb" alt="@Model.Title">
+                        </div>
+                         <ul class="post-meta" data-aos="fade-up"  data-aos-delay="200">
+                            <li>Được post bởi : <a href="#" class="author">Admin</a></li> 
+                            <li>ON : <a href="#" class="date">@Model.CreatedDate</a></li> 
+                         </ul>
+                        <h4 class="post-title" data-aos="fade-up"  data-aos-delay="400"><a href="@url">@Model.PageName</a></h4>
+                           <div class="para-content" data-aos="fade-up"  data-aos-delay="600">
+                               <p>
+                            @Html.Raw(Model.Contents)
+                            </p>
+                            </div>
+                             <div class="para-tags" data-aos="fade-up"  data-aos-delay="0">
+                            @*<span>Tags: </span>
+                            <ul>
+                                <li><a href="#">fashion</a></li>
+                                <li><a href="#">t-shirt</a></li>
+                                <li><a href="#">white</a></li>
+                            </ul>*@
+                        </div>          
+                        </div>
+                         <div class="comment-area">
+                        <div class="comment-box" data-aos="fade-up"  data-aos-delay="0">
+                            <h4 class="title mb-4">3 Bình luận</h4>
+                            <!-- Start - Review Comment -->
+                            <ul class="comment">
+                                <!-- Start - Review Comment list-->
+                                <li class="comment-list">
+                                    <div class="comment-wrapper">
+                                        <div class="comment-img">
+                                            <img src="~/assets1/images/user/image-1.png" alt="">
+                                        </div>
+                                        <div class="comment-content">
+                                            <div class="comment-content-top">
+                                                <div class="comment-content-left">
+                                                    <h6 class="comment-name">Trần Thị Thanh Thảo</h6>
+                                                </div>
+                                                <div class="comment-content-right">
+                                                    <a href="#"><i class="fa fa-reply"></i>Trả lời</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="para-content">
+                                                <p>Hay quá! </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Start - Review Comment Reply-->
+                                    <ul class="comment-reply">
+                                        <li class="comment-reply-list">
+                                            <div class="comment-wrapper">
+                                                <div class="comment-img">
+                                                    <img src="~/assets1/images/user/image-2.png" alt="">
+                                                </div>
+                                                <div class="comment-content">
+                                                    <div class="comment-content-top">
+                                                        <div class="comment-content-left">
+                                                            <h6 class="comment-name">Lê Văn Chiến</h6>
+                                                        </div>
+                                                        <div class="comment-content-right">
+                                                            <a href="#"><i class="fa fa-reply"></i>Trả lời</a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="para-content">
+                                                        <p>Rất ý nghĩa. </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul> <!-- End - Review Comment Reply-->
+                                </li> <!-- End - Review Comment list-->
+                                <!-- Start - Review Comment list-->
+                                <li class="comment-list">
+                                    <div class="comment-wrapper">
+                                        <div class="comment-img">
+                                            <img src="~/assets1/images/user/image-3.png" alt="">
+                                        </div>
+                                        <div class="comment-content">
+                                            <div class="comment-content-top">
+                                                <div class="comment-content-left">
+                                                    <h6 class="comment-name">Nguyễn Văn Lợi</h6>
+                                                </div>
+                                                <div class="comment-content-right">
+                                                    <a href="#"><i class="fa fa-reply"></i>Trả lời</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="para-content">
+                                                <p>Uy tín cực luôn. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li> <!-- End - Review Comment list-->
+                            </ul> <!-- End - Review Comment -->
+                            </div>
+                            <!-- Start comment Form -->
+                        <div class="comment-form" data-aos="fade-up"  data-aos-delay="0">
+                            <div class="coment-form-text-top mt-30">
+                                <h4 class="title mb-3 mt-3">Để lại ý kiến của bạn</h4>
+                                <p>Địa chỉ email của bạn sẽ không được giữ bí mật. Các trường hợp bắt buộc được kí hiệu bằng *</p>
+                            </div>
+
+                            <form action="#" method="post">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="default-form-box mb-20">
+                                            <label for="comment-name">Họ và tên  <span>*</span></label>
+                                            <input id="comment-name" type="text" placeholder="Nhập họ và tên" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="default-form-box mb-20">
+                                            <label for="comment-email">Địa chỉ Email <span>*</span></label>
+                                            <input id="comment-email" type="email" placeholder="Nhập địa chỉ Email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="default-form-box mb-20">
+                                            <label for="comment-review-text">Cảm nhận mua hàng của bạn <span>*</span></label>
+                                            <textarea id="comment-review-text" placeholder="Viết cảm nhận của bạn" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-md btn-golden" type="submit">Bình Luận</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> <!-- End comment Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<br />
+<br />
+<br />

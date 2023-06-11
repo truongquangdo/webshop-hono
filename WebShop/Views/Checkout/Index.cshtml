@@ -1,0 +1,296 @@
+﻿@model WebShop.ModelViews.MuaHangVM
+@{
+    ViewData["Title"] = "Mua hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<WebShop.ModelViews.CartItem> Carts = ViewBag.GioHang;
+}
+@section Styles{
+<style type="text/css">
+    .nice-select .list{
+        border-radius: 0px;
+        overflow-y: auto;
+        overflow:hidden;
+        max-height:200px;
+        overflow-y: scroll;
+    }
+    .nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus{
+        color:red;
+        background:none;
+    }
+
+</style>
+}
+
+
+
+
+<main class="main-content">
+   <!-- ...:::: Start Breadcrumb Section:::... -->
+    <div class="breadcrumb-section breadcrumb-bg-color--golden">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="breadcrumb-title">Checkout</h3>
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="shop-grid-sidebar-left.html">Shop</a></li>
+                                    <li class="active" aria-current="page">Checkout</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ...:::: End Breadcrumb Section:::... -->
+    <divclass="checkout_form" data-aos="fade-up"  data-aos-delay="400">
+        <div class="container">
+            <form asp-controller="Checkout" asp-action="Index" method="post">
+                <input hidden asp-for="CustomerId" />
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+
+                        <div class="checkbox-form">
+                            <h3>THÔNG TIN ĐƠN HÀNG</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div  class="default-form-box">
+                                        <label>Họ và Tên</label>
+                                        <input asp-for="FullName" placeholder="Họ và Tên" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="default-form-box">
+                                        <label>Số điện thoại <span class="required">*</span></label>
+                                        <input asp-for="Phone" placeholder="Số điện thoại" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div  class="default-form-box">
+                                        <label>Địa chỉ nhận hàng <span class="required">*</span></label>
+                                        <input asp-for="Address" placeholder="Địa chỉ nhận hàng" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="your-order">
+                            <h3>THÔNG TIN ĐƠN HÀNG</h3>
+                            <div class="order_table table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th >SẢN PHẨM</th>
+                                            <th >THÀNH TIỀN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Carts.Count() > 0)
+                                        {
+                                            foreach (var item in Carts)
+                                            {
+                                                <tr class="cart_item">
+                                                    <td class="cart-product-name">
+                                                        @item.product.ProductName<strong class="product-quantity">
+                                                            × @item.amount
+                                                        </strong>
+                                                    </td>
+                                                    <td class="cart-product-total"><span class="amount">@item.TotalMoney.ToString("#,##0") VNĐ</span></td>
+                                                </tr>
+                                            }
+                                        }
+
+                                        
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="order-total">
+                                            <th>TỔNG ĐƠN HÀNG</th>
+                                            <td><strong><span class="amount">@Carts.Sum(x => x.TotalMoney).ToString("#,##0") VNĐ</span></strong></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <h5 style="color:red">Vui lòng chọn hình thức thanh toán</h5>
+                           <div class="payment_method">
+                                <div class="panel-default">
+                                    <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse" data-bs-target="#methodCod">
+                                        <input type="checkbox" id="currencyCod">
+                                        <span>Thanh toán khi nhận hàng</span>
+                                    </label>
+
+                                    <div id="methodCod" class="collapse" data-parent="#methodCod">
+                                        <div class="card-body1">
+                                            <p>Vui lòng kiểm tra thông tin, địa chỉ nhận hàng của bạn.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-default">
+                                    <label class="checkbox-default" for="currencyPaypal" data-bs-toggle="collapse" data-bs-target="#methodPaypal">
+                                        <input type="checkbox" id="currencyPaypal">
+                                        <span> Chuyển khoản qua ngân hàng</span>
+                                    </label>
+                                    <div id="methodPaypal" class="collapse " data-parent="#methodPaypal">
+                                        <div class="card-body1">
+                                            <p>Thanh toán qua PayPal; bạn có thể thanh toán bằng thẻ tín dụng nếu bạn không có tài khoản PayPal.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order_button pt-3">
+                                    <button class="btn btn-md btn-black-default-hover" type="submit">Thanh toán</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</main>
+<br />
+<br />
+<br />
+
+
+
+
+ @*  <!-- ...:::: Start Breadcrumb Section:::... -->
+    <div class="breadcrumb-section breadcrumb-bg-color--golden">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="breadcrumb-title">Checkout</h3>
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="shop-grid-sidebar-left.html">Shop</a></li>
+                                    <li class="active" aria-current="page">Checkout</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ...:::: End Breadcrumb Section:::... -->
+
+    <!-- ...:::: Start Checkout Section:::... -->
+    <div class="checkout-section">
+        <div class="container">
+            <div class="row">
+                <!-- User Quick Action Form -->
+
+                <!-- User Quick Action Form -->
+            </div>
+            <!-- Start User Details Checkout Form -->
+            <div class="checkout_form" data-aos="fade-up"  data-aos-delay="400">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <form asp-controller="Checkout" asp-action="Index" method="post">
+                              <input hidden asp-for="CustomerId" />
+                            <h3>Thông tin đơn hàng</h3>
+                            <div class="row">
+
+                                <div class="col-12">
+                                    <div class="default-form-box">
+                                        <label>Họ và tên</label>
+                                        <input asp-for="FullName" placeholder="Họ và Tên" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="default-form-box">
+                                        <label>Số điện thoại</label>
+                                        <input asp-for="Phone" placeholder="Số điện thoại" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="default-form-box">
+                                        <label>Địa chỉ nhận hàng</label>
+                                        <input asp-for="Address" placeholder="Địa chỉ nhận hàng" type="text">
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12 mt-3">
+                                    <div class="order-notes">
+                                        <label for="order_note">Order Notes</label>
+                                        <textarea id="order_note" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <form action="#">
+                            <h3>Thông tin đơn hàng</h3>
+                            <div class="order_table table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Sản phẩm</th>
+                                            <th>Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @if (Carts.Count() > 0)
+                                    {
+                                        foreach (var item in Carts)
+                                        {
+                                                        <tr>
+                                                            <td> @item.product.ProductName <strong> × @item.amount</strong></td>
+                                                            <td> @item.TotalMoney.ToString("#,##0") VNĐ</td>
+                                                        </tr>
+                                        }
+                                    }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="order_total">
+                                            <th>Tổng đơn hàng</th>
+                                            <td><strong>@Carts.Sum(x => x.TotalMoney).ToString("#,##0") VNĐ</strong></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="payment_method">
+                                <div class="panel-default">
+                                    <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse" data-bs-target="#methodCod">
+                                        <input type="checkbox" id="currencyCod">
+                                        <span>Thanh toán khi nhận hàng</span>
+                                    </label>
+
+                                    <div id="methodCod" class="collapse" data-parent="#methodCod">
+                                        <div class="card-body1">
+                                            <p>Vui lòng kiểm tra thông tin, địa chỉ nhận hàng của bạn.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-default">
+                                    <label class="checkbox-default" for="currencyPaypal" data-bs-toggle="collapse" data-bs-target="#methodPaypal">
+                                        <input type="checkbox" id="currencyPaypal">
+                                        <span> Chuyển khoản qua ngân hàng</span>
+                                    </label>
+                                    <div id="methodPaypal" class="collapse " data-parent="#methodPaypal">
+                                        <div class="card-body1">
+                                            <p>Thanh toán qua PayPal; bạn có thể thanh toán bằng thẻ tín dụng nếu bạn không có tài khoản PayPal.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order_button pt-3">
+                                    <button class="btn btn-md btn-black-default-hover" type="submit">Thanh toán</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- Start User Details Checkout Form -->
+        </div>
+    </div><!-- ...:::: End Checkout Section:::... -->
+<br />
+<br />
+<br />*@

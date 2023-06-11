@@ -1,0 +1,300 @@
+﻿
+
+
+
+ <!--Start Header Area-->
+    <header class="header-section d-none d-xl-block">
+        <div class="header-wrapper">
+            <div class="header-bottom header-bottom-color--golden section-fluid sticky-header sticky-color--golden">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center justify-content-between">
+                             <!-- Start Header Logo -->
+                            <div class="header-logo">
+                               <div class="logo">
+                                    <a href="/"><img  src="~/assets1/images/logo/logo.png" alt="" ></a>
+                                </div>
+                            </div>
+                            <!-- End Header Logo -->
+
+                            <!-- Start Header Main Menu -->
+                            <div class="main-menu menu-color--black menu-hover-color--golden">
+                                <nav>
+                                    <ul>
+                                        <li class="has-dropdown">
+                                            <a class="active main-menu-link" href="/">Trang chủ</a>
+                                        </li>
+                                        <li class="has-dropdown has-megaitem">
+                                            <a asp-controller="Product" asp-action="Index">Cửa hàng</a>
+
+                                        </li>
+                                        <li class="has-dropdown">
+                                            <a href="/Blogs.html">Blog</a>
+                                        </li>
+                                        <li class="has-dropdown">
+                                            <a href="/page/huong-dan-mua-hang">Hướng dẫn</a>
+                                        </li>
+                                        <li>
+                                            <a href="/gioi-thieu.html">Giới thiệu</a>
+                                        </li>
+                                        <li>
+                                            <a href="/lien-he.html">Liên hệ</a>
+                                        </li>
+                                        <li class="has-dropdown">
+                                            <a href="#"> <i class="icon-user"></i></a>
+                                            <!-- Sub Menu -->
+                                            <ul class="sub-menu">
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                        <li><a href="/tai-khoan-cua-toi.html">Tài khoản của tôi</a></li>
+                                                        <li><a href="dang-xuat.html">Đăng xuất</a></li>
+                                            }
+                                            else
+                                            {
+                                                        <li><a  href="/dang-ky.html">Đăng ký tài khoản</a></li>
+                                                        <li><a href="/dang-nhap.html">Đăng nhập</a></li>
+                                            }
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div> 
+                            <!-- End Header Main Menu Start -->
+
+                            <!-- Start Header Action Link -->
+                            <ul class="header-action-link action-color--black action-hover-color--golden">
+
+                                <li>
+                                    <a href="#offcanvas-wishlish" class="offcanvas-toggle">
+                                        <i class="icon-heart"></i>
+                                        <span class="item-count">0</span>
+                                    </a>
+                                </li>
+                                <li id="numberCart">
+                                @await Component.InvokeAsync("NumberCart")
+                                </li>
+                                <li>
+                                    <a href="#search">
+                                        <i class="icon-magnifier"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#offcanvas-about" class="offacnvas offside-about offcanvas-toggle">
+                                        <i class="icon-menu"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- End Header Action Link -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header Area -->
+
+    <!-- Start Mobile Header -->
+    <div class="mobile-header mobile-header-bg-color--golden section-fluid d-lg-block d-xl-none">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex align-items-center justify-content-between">
+                    <!-- Start Mobile Left Side -->
+                    <div class="mobile-header-left">
+                        <ul class="mobile-menu-logo">
+                            <li>
+                                <a href="index.html">
+                                    <div class="logo">
+                                        <img src="~/assets1/images/logo/logo_black.png" alt="">
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                     <!-- End Mobile Left Side -->
+
+                     <!-- Start Mobile Right Side -->
+                     <div class="mobile-right-side">
+                        <ul class="header-action-link action-color--black action-hover-color--golden">
+                            <li>
+                                <a href="#search">
+                                    <i class="icon-magnifier"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#offcanvas-wishlish" class="offcanvas-toggle">
+                                    <i class="icon-heart"></i>
+                                    <span class="item-count">0</span>
+                                </a>
+                            </li>
+                            <li id="numberCart">
+                            @await Component.InvokeAsync("NumberCart")
+                                </li>
+                            <li>
+                                <a href="#mobile-menu-offcanvas" class="offcanvas-toggle offside-menu">
+                                    <i class="icon-menu"></i>
+                                </a>
+                            </li>
+                        </ul>
+                     </div>
+                     <!-- End Mobile Right Side -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mobile Header -->
+
+    <!--  Start Offcanvas Mobile Menu Section -->
+    <div id="mobile-menu-offcanvas" class="offcanvas offcanvas-rightside offcanvas-mobile-menu-section">
+        <!-- Start Offcanvas Header -->
+        <div class="offcanvas-header text-right">
+            <button class="offcanvas-close"><i class="ion-android-close"></i></button>
+        </div> <!-- End Offcanvas Header -->
+        <!-- Start Offcanvas Mobile Menu Wrapper -->
+        <div class="offcanvas-mobile-menu-wrapper">
+            <!-- Start Mobile Menu  -->
+            <div class="mobile-menu-bottom">
+                <!-- Start Mobile Menu Nav -->
+                <div class="offcanvas-menu">
+                    <ul>
+                        <li>
+                            <a href="#"><span>Home</span></a>
+
+                        </li>
+                        <li>
+                            <a href="#"><span>Shop</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><span>Blogs</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><span>Pages</span></a>       
+                        </li>
+                        <li><a href="about-us.html">About Us</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                    </ul>
+                </div> <!-- End Mobile Menu Nav -->
+            </div> <!-- End Mobile Menu -->
+
+            <!-- Start Mobile contact Info -->
+            <div class="mobile-contact-info">
+                <div class="logo">
+                  <a href="index.html"><img src="~/assets1/images/logo/logo_white.png" alt=""></a>  
+                </div>
+
+                <address class="address">
+                    <span>Address: 4710-4890 Breckinridge St, Fayettevill</span> 
+                    <span>Call Us: (+800) 345 678, (+800) 123 456</span> 
+                    <span>Email: yourmail@mail.com</span>    
+                </address>
+
+                <ul class="social-link">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+
+                <ul class="user-link">
+                    <li><a href="wishlist.html">Wishlist</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </div>
+            <!-- End Mobile contact Info -->
+
+        </div> <!-- End Offcanvas Mobile Menu Wrapper -->
+    </div> <!-- ...:::: End Offcanvas Mobile Menu Section:::... -->
+
+    <!-- Start Offcanvas Mobile Menu Section -->
+    <div id="offcanvas-about" class="offcanvas offcanvas-rightside offcanvas-mobile-about-section">
+        <!-- Start Offcanvas Header -->
+        <div class="offcanvas-header text-right">
+            <button class="offcanvas-close"><i class="ion-android-close"></i></button>
+        </div> <!-- End Offcanvas Header -->
+        <!-- Start Offcanvas Mobile Menu Wrapper -->
+            <!-- Start Mobile contact Info -->
+            <div class="mobile-contact-info">
+                <div class="logo">
+                  <a href="index.html"><img src="~/assets1/images/logo/logo_white.png" alt=""></a>  
+                </div>
+
+                <address class="address">
+                    <span>Địa chỉ: 470 Trần Đại Nghĩa, Khu đô thị Ngũ Hành Sơn, Đà Nẵng</span> 
+                    <span>Gọi cho chúng tôi: +84 913 598 726</span> 
+                    <span>Email: ntpluong.20it3@vku.udn.vn</span>    
+                </address>
+
+                <ul class="social-link">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+
+                <ul class="user-link">
+                    <li><a href="wishlist.html">Yêu Thích</a></li>
+                    <li><a href="cart.html">Giỏ hàng</a></li>
+                    <li><a href="checkout.html">Thanh toán</a></li>
+                </ul>
+            </div>
+            <!-- End Mobile contact Info -->
+    </div> <!-- ...:::: End Offcanvas Mobile Menu Section:::... -->
+
+    <!-- Start Offcanvas Addcart Section -->
+    <div id="offcanvas-add-cart" class="offcanvas offcanvas-rightside offcanvas-add-cart-section">
+        <!-- Start Offcanvas Header -->
+        <div class="offcanvas-header text-right">
+            <button class="offcanvas-close"><i class="ion-android-close"></i></button>
+        </div> <!-- End Offcanvas Header -->
+    @await Component.InvokeAsync("HeaderCart")
+
+
+    </div> <!-- End  Offcanvas Addcart Section -->
+
+    <!-- Start Offcanvas Mobile Menu Section -->
+    <div id="offcanvas-wishlish" class="offcanvas offcanvas-rightside offcanvas-add-cart-section">
+        <!-- Start Offcanvas Header -->
+        <div class="offcanvas-header text-right">
+            <button class="offcanvas-close"><i class="ion-android-close"></i></button>
+        </div> <!-- ENd Offcanvas Header -->
+
+    @await Component.InvokeAsync("HeaderCart")
+
+    </div> <!-- End Offcanvas Mobile Menu Section -->
+
+    <!-- Start Offcanvas Search Bar Section -->
+    <div id="search" class="search-modal">
+        <button type="button" class="close">×</button>
+        <form action="/tim-kiem" method="get" >
+            <input id="product-name" name="name" type="search" placeholder="Tìm kiếm ở đây" />
+            <button id="search-btn" type="submit" class="btn btn-lg btn-golden">Search</button>
+        </form>
+    </div>
+    <!-- End Offcanvas Search Bar Section -->
+
+    <!-- Offcanvas Overlay -->
+    <div class="offcanvas-overlay"></div>
+
+    @section Scripts{
+        <script>
+                $("#keyword").keyup(function () {
+                    var strkeyword = $('#keyword').val();
+                    $.ajax({
+                        url: '/Views/Search/FindProduct/',
+                        datatype: "json",
+                        type: "POST",
+                        data: { keyword: strkeyword },
+                        async: true,
+                        success: function (results) {
+                            $("#records_table").html("");
+                            $("#records_table").html(results);
+                        },
+                        error: function (xhr) {
+                            alert('error');
+                        }
+                    });
+                });
+            });
+        </script>
+
+}

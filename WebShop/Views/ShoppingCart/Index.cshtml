@@ -1,0 +1,177 @@
+﻿@model List<WebShop.ModelViews.CartItem>
+@{
+    ViewData["Title"] = "Xem giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var returnUrl = Context.Request.Query["ReturnUrl"];
+}
+
+<main class="main-content">
+     <!-- ...:::: Start Breadcrumb Section:::... -->
+    <div class="breadcrumb-section breadcrumb-bg-color--golden">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="breadcrumb-title">Cart</h3>
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="shop-grid-sidebar-left.html">Shop</a></li>
+                                    <li class="active" aria-current="page">Cart</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ...:::: End Breadcrumb Section:::... -->
+    <div class="cart-table-wrapper"  data-aos="fade-up"  data-aos-delay="0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        <form action="javascript:void(0)">
+                            <div class="table_desc">
+                                    <div class="table_page table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="product_remove">Xóa</th>
+                                        <th class="product-thumbnail">Ảnh đại diện</th>
+                                        <th class="cart-product-name">Sản phẩm</th>
+                                        <th class="product-price">Đơn giá</th>
+                                        <th class="product-quantity">Số lượng</th>
+                                        <th class="product-subtotal">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.Count() > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                            <td class="product_remove">
+                                                                                   
+                                                                                        <input type="button" value ="X"  class="removecart btn" data-mahh="@item.product.ProductId" />
+                                                                        </td>
+                                                            <td class="product_thumb">
+                                                    <a href="javascript:void(0)">
+                                                        <img src="~/images/products/@item.product.Thumb" alt="@item.product.Title">
+                                                    </a>
+                                                </td>
+                                                <td class="product-name"><a href="javascript:void(0)">@item.product.ProductName</a></td>
+                                                <td class="product-price"><span class="amount">@item.product.Price.Value.ToString("#,##0") VNĐ</span></td>
+                                                <td class="quantity">
+                                                    <div class="cart-plus-minus">
+                                                        <input data-mahh="@item.product.ProductId" data-dongia="@item.product.Price" class="cartItem cart-plus-minus-box" value="@item.amount" min="1" type="number">
+                                                    </div>
+                                                </td>
+                                                <td class="product-subtotal"><span class="amount">@item.TotalMoney.ToString("#,##0") VNĐ</span></td>
+                                            </tr>
+                                        }
+                                     }
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+
+
+
+                            <div class="coupon_area">
+                <div class="container">
+                        <div class="row">
+                                 <div class="col-lg-6 col-md-6">
+                                     </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="coupon_code right"  data-aos="fade-up"  data-aos-delay="400">
+                                    <h3>Tổng đơn hàng</h3>
+                                         <div class="cart_subtotal">
+                                                 <h5>Thành tiền</h5>
+                                            <p class="cart_amount">@Model.Sum(x => x.TotalMoney).ToString("#,##0") VNĐ</p>
+                                  @*  <ul>
+                                        <li>Thành tiền <span>@Model.Sum(x => x.TotalMoney).ToString("#,##0") VNĐ</span></li>
+                                    </ul>*@
+                                    </div>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                                 <div class="checkout_btn">
+                                                <a href="/checkout.html"  class="btn btn-md btn-golden">Thanh toán</a>
+                                        </div>
+                                    }
+                                    else {
+                                                  <div class="checkout_btn">
+                                                <a href="/dang-nhap.html?returnUrl=/checkout.html" class="btn btn-md btn-golden">Thanh toán</a>
+                                                </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                               </div>
+                            </div>
+                    </form>
+                    }
+                    else {
+                        <h4>CHƯA CÓ HÀNG HÓA TRONG GIỎ HÀNG. BẠN HÃY TÍCH CỰC MUA SẮM ĐI NÀO!</h4>
+                    }
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts{
+<script>
+    $(function () {
+        function loadHeaderCart() {
+            $('#miniCart').load("/AjaxContent/HeaderCart");
+            $('#numberCart').load("/AjaxContent/NumberCart");
+        }
+        $(".removecart").click(function () {
+            var productid = $(this).attr("data-mahh");
+            $.ajax({
+                url: "api/cart/remove",
+                type: "POST",
+                dataType: "JSON",
+                data: { productID: productid },
+                success: function (result) {
+                    if (result.success) {
+                        loadHeaderCart();//Reload lai gio hang
+                        location.reload();
+                    }
+                },
+                error: function (rs) {
+                    alert("Remove Cart Error !")
+                }
+            });
+        });
+        $(".cartItem").click(function () {
+            var productid = $(this).attr("data-mahh");
+            var soluong = parseInt($(this).val());
+            $.ajax({
+                url: "api/cart/update",
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    productID: productid,
+                    amount: soluong
+                },
+                success: function (result) {
+                    if (result.success) {
+                        loadHeaderCart();//Reload lai gio hang
+                        window.location = 'cart.html';
+                    }
+                },
+                error: function (rs) {
+                    alert("Cập nhật Cart Error !")
+                }
+            });
+        });
+    });
+</script>
+}
+<br />
+<br />
+<br />

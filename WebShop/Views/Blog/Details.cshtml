@@ -1,0 +1,342 @@
+﻿@model WebShop.Models.TinDang
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string url = $"/tin-tuc/{Model.Alias}-{Model.PostId}.html";
+    List<TinDang> Baivietlienquan = ViewBag.Baivietlienquan;
+}
+@*<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height" data-bg-image="~/assets1/images/breadcrumb/bg/1-1-1920x373.jpg">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        <h1 class="breadcrumb-heading">@Model.Title</h1>
+                        <ul>
+                            <li> 
+                                <a href="/">Trang chủ <i class="pe-7s-angle-right"></i></a>
+                            </li>
+                            <li>@Model.Title</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blog-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="blog-detail-item">
+                        <div class="blog-img">
+                            <img class="img-full" src="~/images/news/@Model.Thumb" alt="@Model.Title">
+                        </div>
+                        <div class="blog-content text-start pb-0">
+                            <div class="blog-meta text-dim-gray pb-3">
+                                <ul>
+                                    <li class="date"><i class="fa fa-calendar-o me-2"></i>May 21, 2021</li>
+                                    <li>
+                                        <span class="comments me-3">
+                                            <a href="javascript:void(0)">2 Comments</a>
+                                        </span>
+                                        <span class="link-share">
+                                            <a href="javascript:void(0)">Share</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h5 class="title mb-4">
+                                <a href="@url">@Model.Title</a>
+                            </h5>
+                            <p class="short-desc mb-4 mb-7">@Model.Scontents</p>
+                            @Html.Raw(Model.Contents)
+                            <div class="tag-wtih-social">
+                                <div class="tag">
+                                    <span class="title text-primary">Tags:</span>
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0)">Furniture,</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">Electronic,</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">Fashion</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="social-link">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-pinterest-p"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-dribbble"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="feedback-area section-space-top-55">
+                                <h4 class="heading mb-1">Bài viết liên quan</h4>
+                                <hr />
+                                <div class="widgets-area mb-9">
+                                    <div class="widgets-item">
+                                        <div class="swiper-container widgets-list-slider style-2 swiper-container-multirow swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
+                                            <div class="swiper-wrapper" id="swiper-wrapper-62104b1dfbb1d3188" aria-live="polite" style="width: 288px; transform: translate3d(0px, 0px, 0px);">
+                                                @if (Baivietlienquan != null && Baivietlienquan.Count() > 0)
+                                                            {
+                                                                foreach (var item in Baivietlienquan)
+                                                                {
+                                                                    string _url = $"/tin-tuc/{item.Alias}-{item.PostId}.html";
+                                                                    <div class="swiper-slide" role="group" aria-label="3 / 3" style="margin-top: 25px; width: 263px; margin-right: 25px;">
+                                                            <div class="product-list-item">
+                                                                <div class="product-img img-zoom-effect">
+                                                                    <a href="@_url">
+                                                                        <img class="img-full" src="~/images/news/@item.Thumb" alt="@item.Title">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="product-content">
+                                                                    <h5 class="title mb-3">
+                                                                        <a href="@_url">@item.Title</a>
+                                                                    </h5>
+                                                                    <div class="blog-meta text-manatee pb-1">
+                                                                        <ul>
+                                                                            <li class="date">@item.CreatedDate</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+*@
+
+
+<!-- ...:::: Start Breadcrumb Section:::... -->
+    <div class="breadcrumb-section breadcrumb-bg-color--golden">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="breadcrumb-title">Blog </h3>
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="index.html">Trang chủ</a></li>
+                                    <li><a href="blog-grid-sidebar-left.html">Blog</a></li>
+                                    <li class="active" aria-current="page">Bài viết</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ...:::: End Breadcrumb Section:::... -->
+
+                                     <!-- ...:::: Start Blog Single Section:::... -->
+    <div class="blog-section">
+        <div class="container">
+            <div class="row flex-column-reverse flex-lg-row">
+                <div class="col-lg-3">
+                    <!-- Start Sidebar Area -->
+                    <div class="siderbar-section" data-aos="fade-up"  data-aos-delay="0">
+
+
+
+                        <!-- Start Single Sidebar Widget -->
+                        <div class="sidebar-single-widget" >
+                            <h6 class="sidebar-title">Các bài viết khác</h6>
+                            <!-- Start Product Default Single Item -->
+                            <div class="blog-list blog-grid-single-item blog-color--golden"  data-aos="fade-up"  data-aos-delay="0">
+                            @if (Baivietlienquan != null && Baivietlienquan.Count() > 0)
+                            {
+                                foreach (var item in Baivietlienquan)
+                                {
+                                    string _url = $"/tin-tuc/{item.Alias}-{item.PostId}.html";
+                                        <div class="image-box">
+                                            <a href="@_url" class="image-link">
+                                                <img class="img-fluid" src="~/images/news/@item.Thumb" alt="@item.Title">
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <ul class="post-meta">
+                                               <li>Người đăng: <a href="#" class="author">Admin</a></li> 
+                                               <li>Vào ngày : <a href="#" class="date">@item.CreatedDate</a></li> 
+                                            </ul>
+                                            <h6 class="title"><a href="@_url">@item.Title</a></h6>
+                                            <a href="#" class="read-more-btn icon-space-left">Đọc bài viết <span class="icon"><i class="ion-ios-arrow-thin-right"></i></span></a>
+                                        </div>
+                                }
+                            }
+                            </div>
+                            <!-- End Product Default Single Item -->
+                        </div> <!-- End Single Sidebar Widget -->
+
+                        <!-- Start Single Sidebar Widget -->
+
+
+                    </div> <!-- End Sidebar Area -->
+                </div>
+                <div class="col-lg-9">
+                    <!-- Start Blog Single Content Area -->
+                    <div class="blog-single-wrapper">
+                        <div class="blog-single-img" data-aos="fade-up"  data-aos-delay="0">
+                            <img class="img-fluid" src="~/images/news/@Model.Thumb" alt="@Model.Title">
+                        </div>
+                      
+                        <h4 class="post-title" data-aos="fade-up"  data-aos-delay="400">  <a href="@url">@Model.Title</a></h4>
+                        <div class="para-content" data-aos="fade-up"  data-aos-delay="600">
+                            <p>@Model.Scontents</p>
+                        @Html.Raw(Model.Contents)
+                        </div>
+                        <div class="para-tags" data-aos="fade-up"  data-aos-delay="0">
+                            @*<span>Tags: </span>
+                            <ul>
+                                <li><a href="#">fashion</a></li>
+                                <li><a href="#">t-shirt</a></li>
+                                <li><a href="#">white</a></li>
+                            </ul>*@
+                        </div>
+                    </div> <!-- End Blog Single Content Area -->
+                    <div class="comment-area">
+                        <div class="comment-box" data-aos="fade-up"  data-aos-delay="0">
+                            <h4 class="title mb-4">3 Comments</h4>
+                            <!-- Start - Review Comment -->
+                            <ul class="comment">
+                                <!-- Start - Review Comment list-->
+                                <li class="comment-list">
+                                    <div class="comment-wrapper">
+                                        <div class="comment-img">
+                                            <img src="~/assets1/images/user/image-1.png" alt="">
+                                        </div>
+                                        <div class="comment-content">
+                                            <div class="comment-content-top">
+                                                <div class="comment-content-left">
+                                                    <h6 class="comment-name">Trần Thị Thanh Thảo</h6>
+                                                </div>
+                                                <div class="comment-content-right">
+                                                    <a href="#"><i class="fa fa-reply"></i>Trả lời</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="para-content">
+                                                <p>Hay quá! </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Start - Review Comment Reply-->
+                                    <ul class="comment-reply">
+                                        <li class="comment-reply-list">
+                                            <div class="comment-wrapper">
+                                                <div class="comment-img">
+                                                    <img src="~/assets1/images/user/image-2.png" alt="">
+                                                </div>
+                                                <div class="comment-content">
+                                                    <div class="comment-content-top">
+                                                        <div class="comment-content-left">
+                                                            <h6 class="comment-name">Lê Văn Chiến</h6>
+                                                        </div>
+                                                        <div class="comment-content-right">
+                                                            <a href="#"><i class="fa fa-reply"></i>Trả lời</a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="para-content">
+                                                        <p>Rất ý nghĩa. </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul> <!-- End - Review Comment Reply-->
+                                </li> <!-- End - Review Comment list-->
+                                <!-- Start - Review Comment list-->
+                                <li class="comment-list">
+                                    <div class="comment-wrapper">
+                                        <div class="comment-img">
+                                            <img src="~/assets1/images/user/image-3.png" alt="">
+                                        </div>
+                                        <div class="comment-content">
+                                            <div class="comment-content-top">
+                                                <div class="comment-content-left">
+                                                    <h6 class="comment-name">Nguyễn Văn Lợi</h6>
+                                                </div>
+                                                <div class="comment-content-right">
+                                                    <a href="#"><i class="fa fa-reply"></i>Trả lời</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="para-content">
+                                                <p>Uy tín cực luôn. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li> <!-- End - Review Comment list-->
+                            </ul> <!-- End - Review Comment -->
+                        </div>
+
+                        <!-- Start comment Form -->
+                        <div class="comment-form" data-aos="fade-up"  data-aos-delay="0">
+                            <div class="coment-form-text-top mt-30">
+                                <h4 class="title mb-3 mt-3">Để lại ý kiến của bạn</h4>
+                                <p>Email của bạn sẽ được giữ bí mật. Trong mọi trường hợp bắt buộc *</p>
+                            </div>
+
+                            <form action="#" method="post">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="default-form-box mb-20">
+                                            <label for="comment-name">Họ tên <span>*</span></label>
+                                            <input id="comment-name" type="text" placeholder="Nhập Họ tên" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="default-form-box mb-20">
+                                            <label for="comment-email">Địa chỉ Email <span>*</span></label>
+                                            <input id="comment-email" type="email" placeholder="Nhập Email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="default-form-box mb-20">
+                                            <label for="comment-review-text">Cảm nhận của bạn <span>*</span></label>
+                                            <textarea id="comment-review-text" placeholder="Điền nội dung" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-md btn-golden" type="submit">Bình Luận</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> <!-- End comment Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- ...:::: End Blog Single Section:::... -->
+<br />
+<br />
+<br />

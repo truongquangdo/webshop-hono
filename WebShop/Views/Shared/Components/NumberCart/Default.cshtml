@@ -1,0 +1,36 @@
+﻿@model List<WebShop.ModelViews.CartItem>
+@*@if (Model != null && Model.Count() > 0)
+{
+    <li class="minicart-wrap me-3 me-lg-0">
+        <a href="#miniCart" class="minicart-btn toolbar-btn">
+            <i class="pe-7s-shopbag"></i>
+            <span class="quantity">@Model.Count()</span>
+        </a>
+    </li>
+}
+else
+{
+    <li class="minicart-wrap me-3 me-lg-0">
+        <a href="#miniCart" class="toolbar-btn">
+            <i class="pe-7s-shopbag"></i>
+            <span class="quantity">0</span>
+        </a>
+    </li>
+}*@
+@if (Model != null && Model.Count() > 0)
+{
+ <li>
+ <a href="#offcanvas-add-cart" class="offcanvas-toggle">
+ <i class="icon-bag"></i>
+     <span class="item-count">@Model.Count()</span>
+ </a>
+</li>
+} 
+else{
+         <li>
+     <a href="#offcanvas-add-cart" class="offcanvas-toggle">
+     <i class="icon-bag"></i>
+         <span class="item-count">0</span>
+     </a>
+    </li>
+}
